@@ -99,11 +99,11 @@ request(sourceUrl, function(error, response, html){
 			}
 			
 			try{
-				transContents = allContents;
-				// if (geo == "KR") // 한국 트랜드는 번역 안함
-				// 	transContents = allContents;
-				// else // 해외 트랜드 번역하기
-				// 	transContents = await translateFn(allContents);
+				// transContents = allContents;
+				if (geo == "KR") // 한국 트랜드는 번역 안함
+					transContents = allContents;
+				else // 해외 트랜드 번역하기
+					transContents = await translateFn(allContents);
 
 				// 번역된 문장 배열로 저장
 				var translatedContents = new Array();
@@ -111,12 +111,25 @@ request(sourceUrl, function(error, response, html){
 			
 				// 최상위 json array 정의
 				const all = {
-					size: 0,
-					date: tempDate,
+					sizes: new Array(),
+					dates: new Array(),
 					keywords: new Array()
 				}
 				
+				var sizeArray = new Array();
+				var dateArray = new Array();
 				var keywordArray = new Array();
+				
+				// size json object 정의
+				const size = {
+					size: 0
+				}
+				
+				// date json object 정의
+				const date = {
+					date: tempDate
+				}
+				dateArray.push(date);
 				
 				// keyword json object 정의
 				const keyword = {
@@ -132,7 +145,11 @@ request(sourceUrl, function(error, response, html){
 					keywordArray.push(keywordJSON); // keyword array에 키워드 추가
 				}
 				
-				all.size = keywordArray.length;
+				size.size = keywordArray.length;
+				sizeArray.push(size);
+				
+				all.sizes = sizeArray;
+				all.dates = dateArray;
 				all.keywords = keywordArray;
 				
 				const resultJson = JSON.stringify(all);
