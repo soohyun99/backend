@@ -1,4 +1,9 @@
 # 백엔드 
+<b> 참고) 프론트 엔트 </b>
+웹 사이트의 프론트엔드 코드는 [여기를 클릭하면](https://github.com/planetEarth1886/ReactGlobe) 확인 가능합니다.
+
+
+
 
 ## 프로그램 개발 시 버전 설명
 1) node 버전 : v12.13.1
@@ -6,10 +11,10 @@
 2) npm 버전  : 6.12.1
 
 ### 백엔드 패키지 다운로드 시 주의사항 
-* master 브랜치에서 npm i로 노드 모듈을 새로 다운받는다
+* master 브랜치에서 npm i로 노드 모듈을 새로 다운받습니다
 	* package-lock.json 파일 다운로드 시 참고 자료: [package-lock.josn에 관하여](https://medium.com/@han7096/package-lock-json-%EC%97%90-%EA%B4%80%ED%95%98%EC%97%AC-5652f90b734c)
 
-* package-lock.json 의 역할: 백엔드 작동을 위해 필요한 모듈 리스트로 `npm install (모듈이름)` 를 터미널해서 작동하면 원하는 모듈들을 로컬 컴퓨터에 설치 가능하다. 
+* package-lock.json 의 역할: 백엔드 작동을 위해 필요한 모듈 리스트로 `npm install (모듈이름)` 를 터미널해서 작동하면 원하는 모듈들을 로컬 컴퓨터에 설치 가능합니다. 
 
 ### 
 
