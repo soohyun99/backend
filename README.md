@@ -90,14 +90,14 @@ setInterval(function(){
 ```
 
 ## 2. main_json.js
-### [Google Trends 웹 사이트](https://trends.google.com/trends/trendingsearches/daily?geo=KR)에서 원하는 데이터 웹 크롤링한다.
-Node.js 내장 모듈인 Request 모듈을 이용해 인터넷에 요청을 보내고 요청에 해당하는 페이지를 가져온다. Cheerio 모듈을 이용해 받아온 페이지를 파싱하여 전체 페이지 중에서 필요한 부분의 정보만 가져온다. 
+### [Google Trends 웹 사이트](https://trends.google.com/trends/trendingsearches/daily?geo=KR)에서 원하는 데이터 웹 크롤링합니다.
+Node.js 내장 모듈인 Request 모듈을 이용해 인터넷에 요청을 보내고 요청에 해당하는 페이지를 가져온다. Cheerio 모듈을 이용해 받아온 페이지를 파싱하여 전체 페이지 중에서 필요한 부분의 정보만 가져옵니다. 
 ```javascript
 var cheerio = require('cheerio');
 var request = require('request');
 ```
-[구글 트렌드 웹 페이지](https://trends.google.com/trends/trendingsearches/daily)에서 가져올 국가 코드 및 번역할 언어 코드 변수에 저장한다. 
-cmd로 실행할 때 사용한 `geo`가 US, `transLanguage`가 en라면  `sourceUrl`은 변수 값은 https://trends.google.com/trends/trendingsearches/daily?geo=US이 될 것이다. 
+[구글 트렌드 웹 페이지](https://trends.google.com/trends/trendingsearches/daily)에서 가져올 국가 코드 및 번역할 언어 코드 변수에 저장합니다. 
+cmd로 실행할 때 사용한 `geo`가 US, `transLanguage`가 en라면  `sourceUrl`은 변수 값은 https://trends.google.com/trends/trendingsearches/daily?geo=US이 될 것입니다. 
 
 ``` js
 // cmd로 실행할 때 사용한 argument 가져오기
@@ -111,7 +111,7 @@ var title = new Array(),
 	title_trans = new Array();
 ```
 
-웹사이트에서 크롤링해오는 트렌드 뉴스의 날짜와 요일을 한국어로 번역하여 반환하는 `convertWeekDaysByKorean()`함수 `getDataFormat()`함수
+웹사이트에서 크롤링해오는 트렌드 뉴스의 날짜와 요일을 한국어로 번역하여 반환하는 `convertWeekDaysByKorean()`함수 `getDataFormat()`함수를 정의합니다. 
 ```
 // 요일 번역
 function convertWeekDaysByKorean(weekday) {
@@ -151,7 +151,7 @@ function getDataFormat(date) {
 	}
 }
 ```
-request 모듈을 이용해서 cheerio로 불러오고 $에 cheerio.load를 한다. 
+request 모듈을 이용해서 cheerio로 불러오고 $에 cheerio.load를 합니다. 
 ```js
 // 크롤링하기
 request(sourceUrl, function(error, response, html){
@@ -176,7 +176,7 @@ request(sourceUrl, function(error, response, html){
 		
 ```
 
-번역할 문장을 생성한다. 
+번역할 문장을 생성합니다. 
 ``` JAVASCRIPT
 // 번역 및 출력 함수 정의
 		async function logData(title, date, description){
@@ -194,13 +194,8 @@ request(sourceUrl, function(error, response, html){
 				allContents = allContents + title[i] + "^" + description[i] + "^";
 			}
 ```
-```JAVASCRIPT
-try{
 
-```
-
-
-### [Google Translate Api 모듈](https://github.com/vitalets/google-translate-api)을 이용해 크롤링 결과를 한국어로 번역한다.
+### [Google Translate Api 모듈](https://github.com/vitalets/google-translate-api)을 이용해 크롤링 결과를 한국어로 번역합니다.
 ```javascript
 const translate = require('@vitalets/google-translate-api')
 
@@ -211,7 +206,7 @@ async function translateFn(text){
 }
 ```
 
-크롤링 결과 번역하는 `translateFn`함수 호출하여 배열에 저장
+크롤링 결과 번역하는 `translateFn`함수 호출하여 배열에 저장합니다.
 ``` JAVASCRIPT
 // transContents = allContents;
 if (geo == "KR") // 한국 트랜드는 번역 안함
@@ -239,7 +234,7 @@ const resultJson = JSON.stringify(all);
 				fs.writeFileSync(fileName, resultJson);
 ```
 
-크롤링 및 번역 결과를 JSON 파일형식으로 저장하기 위해 size, date, keyword라는 이름의 json array 및 json object 정의 
+크롤링 및 번역 결과를 JSON 파일형식으로 저장하기 위해 size, date, keyword라는 이름의 json array 및 json object 정의합니다.
 ``` JS
 // 최상위 json array 정의
 const all = {
@@ -269,7 +264,7 @@ const keyword = {
 	content: ""
 }
 ```
-각 키워드에 대해서 번역하여 배열에 저장해 두었던 결과를 `keywordArray` 배열에 추가한다. 
+각 키워드에 대해서 번역하여 배열에 저장해 두었던 결과를 `keywordArray` 배열에 추가합니다. 
 ```js
 // 각 키워드에 대해
 for (let rank = 0; rank<(translatedContents.length/2 - 1); rank++) {
@@ -280,7 +275,7 @@ for (let rank = 0; rank<(translatedContents.length/2 - 1); rank++) {
 }
 ```
 
-각 나라별 트렌드의 개수를 의미하는 `sizeArray` 배열과, 날짜를 의미하는 `dateArray'배열, `keywordArray`배열을 json 배열 `all`에 저장한다.
+각 나라별 트렌드의 개수를 의미하는 `sizeArray` 배열과, 날짜를 의미하는 `dateArray'배열, `keywordArray`배열을 json 배열 `all`에 저장합니다.
 ```js
 size.size = keywordArray.length;
 sizeArray.push(size);
@@ -289,12 +284,13 @@ all.sizes = sizeArray;
 all.dates = dateArray;
 all.keywords = keywordArray;
 ````
-`resultJson`은 `JSON.stringify()`를 이용해 all 객체를 Json 문자열로 변환한 결과값이다. `fileName`이름의 json 파일로 resultJson 값을 저장해준다.
+`resultJson`은 `JSON.stringify()`를 이용해 all 객체를 Json 문자열로 변환한 결과값이다. `fileName`이름의 json 파일로 resultJson 값을 저장해줍니다.
 ```javascript
 const resultJson = JSON.stringify(all);
 fs.writeFileSync(fileName, resultJson);
 ```
 
-
 ## 3. json_result 폴더 
+
+크롤링 및 번역 결과 생성된 파일들이 `result_(국가코드).json` 형식으로 저장되어 있습니다. 
 
